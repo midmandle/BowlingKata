@@ -21,7 +21,7 @@ class Game {
 
             if (frame.isSpare()) {
                 scores.remove(scores.size() - 2);
-                scores.add(scores.size() - 2, frame.secondRoll + rollScore);
+                scores.add(scores.size() - 2, frame.secondRoll.score + rollScore);
             }
         }
     }
