@@ -3,6 +3,7 @@ package bowlingkata;
 public class Frame {
     final Roll firstRoll;
     final Roll secondRoll;
+
     private FrameState frameState = FrameState.IN_PLAY;
 
     public Frame(int firstRoll, int secondRoll) {
@@ -21,5 +22,10 @@ public class Frame {
 
     public FrameState state() {
         return frameState;
+    }
+
+
+    public int secondRollScore() {
+        return secondRoll.score;
     }
 }
