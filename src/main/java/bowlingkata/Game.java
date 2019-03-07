@@ -17,13 +17,18 @@ class Game {
         scores.add(rollScore);
 
         if (scores.size() > 2) {
-            int firstRoll = scores.get(scores.size() - 3);
-            int secondRoll = scores.get(scores.size() - 2);
+            Frame frame = lastRolledFrame();
 
-            if (firstRoll + secondRoll == 10) {
+            if (frame.isSpare()) {
                 scores.remove(scores.size() - 2);
-                scores.add(scores.size() - 2, secondRoll + rollScore);
+                scores.add(scores.size() - 2, frame.secondRoll + rollScore);
             }
         }
+    }
+
+    private Frame lastRolledFrame() {
+        int firstRoll = scores.get(scores.size() - 3);
+        int secondRoll = scores.get(scores.size() - 2);
+        return new Frame(firstRoll, secondRoll);
     }
 }
