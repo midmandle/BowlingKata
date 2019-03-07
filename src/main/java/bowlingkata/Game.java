@@ -1,12 +1,18 @@
 package bowlingkata;
 
 class Game {
+    private int score;
+
+    public Game() {
+        this.score = 0;
+    }
+
     int score() {
-        return 0;
+        return this.score;
     }
 
 
     public void roll(int rollScore) {
-        throw new UnsupportedOperationException();
+        this.score += rollScore;
     }
 }
