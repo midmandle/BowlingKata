@@ -4,15 +4,6 @@ public class Frame {
     private Roll firstRoll;
     private Roll secondRoll;
 
-    public Frame(Roll firstRoll, Roll secondRoll) {
-        this.firstRoll = firstRoll;
-        this.secondRoll = secondRoll;
-    }
-
-    public Frame(Roll roll) {
-        this.firstRoll = roll;
-    }
-
     public Frame() {
 
     }

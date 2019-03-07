@@ -27,8 +27,11 @@ class Game {
     }
 
     private Frame lastRolledFrame() {
-        int firstRoll = scores.get(scores.size() - 3);
-        int secondRoll = scores.get(scores.size() - 2);
-        return new Frame(new Roll(firstRoll), new Roll(secondRoll));
+        Roll firstRoll = new Roll(scores.get(scores.size() - 3));
+        Roll secondRoll = new Roll(scores.get(scores.size() - 2));
+        Frame lastFrame = new Frame();
+        lastFrame.add(firstRoll);
+        lastFrame.add(secondRoll);
+        return lastFrame;
     }
 }
