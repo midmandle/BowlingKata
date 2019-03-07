@@ -33,4 +33,14 @@ public class Frame {
         }
 
     }
+
+    public void addBonus(Roll roll) {
+        secondRoll = new Roll(roll.score + secondRoll.score);
+    }
+
+    public int score() {
+        int firstScore = firstRoll == null ? 0 : firstRoll.score;
+        int secondScore = secondRoll == null ? 0 : secondRoll.score;
+        return firstScore + secondScore;
+    }
 }

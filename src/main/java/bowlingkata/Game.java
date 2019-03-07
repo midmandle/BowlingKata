@@ -4,34 +4,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Game {
-    private List<Integer> scores = new ArrayList<>();
+    private List<Frame> frames;
+
+    public Game() {
+        frames = new ArrayList<>();
+        frames.add(new Frame());
+    }
 
     int score() {
-        return scores
-                .stream().mapToInt(score -> score)
+        return frames
+                .stream().mapToInt(frame -> frame.score())
                 .sum();
     }
 
 
     public void roll(int rollScore) {
-        scores.add(rollScore);
 
-        if (scores.size() > 2) {
-            Frame frame = lastRolledFrame();
+        if (getFrame(1).state() == FrameState.FINISHED) {
+            frames.add(new Frame());
+        }
 
-            if (frame.isSpare()) {
-                scores.remove(scores.size() - 2);
-                scores.add(scores.size() - 2, frame.secondRollScore() + rollScore);
+        Roll roll = new Roll(rollScore);
+        getFrame(1).add(roll);
+
+        if (frames.size() > 1) {
+            if (getFrame(2).isSpare()) {
+                getFrame(2).addBonus(roll);
             }
         }
     }
 
-    private Frame lastRolledFrame() {
-        Roll firstRoll = new Roll(scores.get(scores.size() - 3));
-        Roll secondRoll = new Roll(scores.get(scores.size() - 2));
-        Frame lastFrame = new Frame();
-        lastFrame.add(firstRoll);
-        lastFrame.add(secondRoll);
-        return lastFrame;
+    private Frame getFrame(int i) {
+        return frames.get(frames.size() - i);
     }
 }
