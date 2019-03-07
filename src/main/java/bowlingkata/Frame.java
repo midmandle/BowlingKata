@@ -12,4 +12,8 @@ public class Frame {
     boolean isSpare() {
         return firstRoll + secondRoll == 10;
     }
+
+    public FrameState state() {
+        throw new UnsupportedOperationException();
+    }
 }
