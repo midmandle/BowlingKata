@@ -1,5 +1,5 @@
 package bowlingkata;
 
 public enum FrameState {
-    IN_PLAY
+    FINISHED, IN_PLAY
 }

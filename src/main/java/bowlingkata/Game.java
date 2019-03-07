@@ -29,6 +29,6 @@ class Game {
     private Frame lastRolledFrame() {
         int firstRoll = scores.get(scores.size() - 3);
         int secondRoll = scores.get(scores.size() - 2);
-        return new Frame(firstRoll, secondRoll);
+        return new Frame(new Roll(firstRoll), new Roll(secondRoll));
     }
 }
