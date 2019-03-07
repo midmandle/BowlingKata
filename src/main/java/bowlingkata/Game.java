@@ -1,18 +1,29 @@
 package bowlingkata;
 
-class Game {
-    private int score;
+import java.util.ArrayList;
+import java.util.List;
 
-    public Game() {
-        this.score = 0;
-    }
+class Game {
+    private List<Integer> scores = new ArrayList<>();
 
     int score() {
-        return this.score;
+        return scores
+                .stream().mapToInt(score -> score)
+                .sum();
     }
 
 
     public void roll(int rollScore) {
-        this.score += rollScore;
+        scores.add(rollScore);
+
+        if (scores.size() > 2) {
+            int firstRoll = scores.get(scores.size() - 3);
+            int secondRoll = scores.get(scores.size() - 2);
+
+            if (firstRoll + secondRoll == 10) {
+                scores.remove(scores.size() - 2);
+                scores.add(scores.size() - 2, secondRoll + rollScore);
+            }
+        }
     }
 }

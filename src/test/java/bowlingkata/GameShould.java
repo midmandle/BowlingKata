@@ -33,4 +33,13 @@ class GameShould {
 
         assertEquals(2, game.score());
     }
+
+    @Test
+    void give_a_bonus_score_with_the_score_of_the_next_roll() {
+        game.roll(5);
+        game.roll(5);
+        game.roll(3);
+
+        assertEquals(16, game.score());
+    }
 }
