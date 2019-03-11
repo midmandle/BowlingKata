@@ -13,6 +13,8 @@ public class Frame {
     }
 
     public FrameState state() {
+        if(this.isStrike())
+            return FrameState.FINISHED;
         return firstRoll != null && secondRoll != null ? FrameState.FINISHED : FrameState.IN_PLAY;
     }
 
