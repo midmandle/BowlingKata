@@ -23,6 +23,15 @@ public class FrameShould {
     }
 
     @Test
+    void check_if_there_is_a_strike() {
+        Frame frame = new Frame();
+
+        frame.add(new Roll(10));
+
+        assertTrue(frame.isStrike());
+    }
+
+    @Test
     void finish_after_two_rolls() {
         Frame frame = new Frame();
         frame.add(new Roll(5));

@@ -42,4 +42,15 @@ class GameShould {
 
         assertEquals(16, game.score());
     }
+
+    @Test
+    void calculate_score_with_multiple_spares() {
+        game.roll(5);
+        game.roll(5);
+        game.roll(5);
+        game.roll(5);
+        game.roll(1);
+
+        assertEquals(27, game.score());
+    }
 }

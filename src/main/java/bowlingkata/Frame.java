@@ -43,4 +43,8 @@ public class Frame {
         int secondScore = secondRoll == null ? 0 : secondRoll.score;
         return firstScore + secondScore;
     }
+
+    public boolean isStrike() {
+        return false;
+    }
 }
