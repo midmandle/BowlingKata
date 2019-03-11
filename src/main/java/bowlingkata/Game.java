@@ -12,7 +12,7 @@ class Game {
 
     public void roll(int rollScore) {
 
-        if (frames.getFrame(1).state() == FrameState.FINISHED) {
+        if (frames.state() == FrameState.FINISHED) {
             frames.addFrame();
         }
 
@@ -22,7 +22,11 @@ class Game {
         if (frames.size() > 1) {
             Frame previousFrame = frames.previousFrame();
 
-            if (previousFrame.isSpare() || previousFrame.isStrike()) {
+            if (previousFrame.isStrike()) {
+                previousFrame.addBonus(roll);
+            }
+
+            if (previousFrame.isSpare() && frames.state() == FrameState.IN_PLAY) {
                 previousFrame.addBonus(roll);
             }
         }

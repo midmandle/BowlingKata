@@ -1,8 +1,12 @@
 package bowlingkata;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Frame {
     private Roll firstRoll;
     private Roll secondRoll;
+    private List<Roll> bonusRolls = new ArrayList<>();
 
     boolean isSpare() {
         if(firstRoll != null && secondRoll != null)
@@ -30,17 +34,13 @@ public class Frame {
     }
 
     public void addBonus(Roll roll) {
-        if (isStrike()) {
-            firstRoll = new Roll(roll.score + firstRoll.score);
-            return;
-        }
-        secondRoll = new Roll(roll.score + secondRoll.score);
+        bonusRolls.add(roll);
     }
 
     public int score() {
         int firstScore = firstRoll == null ? 0 : firstRoll.score;
         int secondScore = secondRoll == null ? 0 : secondRoll.score;
-        return firstScore + secondScore;
+        return firstScore + secondScore + bonusRolls.stream().mapToInt(roll -> roll.score).sum();
     }
 
     public boolean isStrike() {

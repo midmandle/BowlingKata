@@ -40,4 +40,8 @@ public class Frames {
     void addRollToCurrentFrame(Roll roll) {
         currentFrame().add(roll);
     }
+
+    FrameState state() {
+        return currentFrame().state();
+    }
 }
