@@ -17,11 +17,13 @@ class Game {
         }
 
         Roll roll = new Roll(rollScore);
-        frames.getFrame(1).add(roll);
+        frames.addRollToCurrentFrame(roll);
 
         if (frames.size() > 1) {
-            if (frames.getFrame(2).isSpare()) {
-                frames.getFrame(2).addBonus(roll);
+            Frame previousFrame = frames.previousFrame();
+
+            if (previousFrame.isSpare() || previousFrame.isStrike()) {
+                previousFrame.addBonus(roll);
             }
         }
     }

@@ -28,4 +28,16 @@ public class Frames {
     double size() {
         return frames.size();
     }
+
+    Frame currentFrame() {
+        return frames.get(frames.size() - 1);
+    }
+
+    Frame previousFrame() {
+        return frames.get(frames.size() - 2);
+    }
+
+    void addRollToCurrentFrame(Roll roll) {
+        currentFrame().add(roll);
+    }
 }

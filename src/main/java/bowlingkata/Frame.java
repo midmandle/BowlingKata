@@ -4,10 +4,6 @@ public class Frame {
     private Roll firstRoll;
     private Roll secondRoll;
 
-    public Frame() {
-
-    }
-
     boolean isSpare() {
         if(firstRoll != null && secondRoll != null)
             return firstRoll.score + secondRoll.score == 10;
@@ -18,11 +14,6 @@ public class Frame {
         if(this.isStrike())
             return FrameState.FINISHED;
         return firstRoll != null && secondRoll != null ? FrameState.FINISHED : FrameState.IN_PLAY;
-    }
-
-
-    public int secondRollScore() {
-        return secondRoll == null ? 0 : secondRoll.score;
     }
 
     public void add(Roll roll) {
@@ -39,6 +30,10 @@ public class Frame {
     }
 
     public void addBonus(Roll roll) {
+        if (isStrike()) {
+            firstRoll = new Roll(roll.score + firstRoll.score);
+            return;
+        }
         secondRoll = new Roll(roll.score + secondRoll.score);
     }
 
@@ -50,7 +45,7 @@ public class Frame {
 
     public boolean isStrike() {
         if (firstRoll != null)
-            return firstRoll.score == 10;
+            return firstRoll.score >= 10;
 
         return false;
     }
