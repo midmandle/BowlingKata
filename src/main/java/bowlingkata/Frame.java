@@ -45,6 +45,9 @@ public class Frame {
     }
 
     public boolean isStrike() {
+        if (firstRoll != null)
+            return firstRoll.score == 10;
+
         return false;
     }
 }
