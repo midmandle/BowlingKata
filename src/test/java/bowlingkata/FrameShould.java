@@ -3,8 +3,7 @@ package bowlingkata;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class FrameShould {
 
@@ -42,6 +41,13 @@ public class FrameShould {
         frame.add(new Roll(10));
 
         assertEquals(FrameState.FINISHED, frame.state());
+    }
+
+    @Test
+    void when_frame_is_a_strike_it_cannot_be_a_spare() {
+        frame.add(new Roll(10));
+
+        assertFalse(frame.isSpare());
     }
 
     @Test

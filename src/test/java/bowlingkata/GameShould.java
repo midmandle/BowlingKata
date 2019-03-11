@@ -52,4 +52,13 @@ class GameShould {
 
         assertEquals(27, game.score());
     }
+
+    @Test
+    void give_a_bonus_score_of_the_next_two_rolls_if_a_strike() {
+        game.roll(10);
+        game.roll(1);
+        game.roll(1);
+
+        assertEquals(14, game.score());
+    }
 }

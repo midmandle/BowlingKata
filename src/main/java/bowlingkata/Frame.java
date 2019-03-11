@@ -9,7 +9,9 @@ public class Frame {
     }
 
     boolean isSpare() {
-        return firstRoll.score + secondRoll.score == 10;
+        if(firstRoll != null && secondRoll != null)
+            return firstRoll.score + secondRoll.score == 10;
+        return false;
     }
 
     public FrameState state() {
