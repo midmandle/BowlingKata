@@ -61,4 +61,14 @@ class GameShould {
 
         assertEquals(14, game.score());
     }
+
+    @Test
+    void give_bonus_in_case_of_two_strikes_in_a_row() {
+        game.roll(10);
+        game.roll(10);
+        game.roll(1);
+        game.roll(1);
+
+        assertEquals(35, game.score());
+    }
 }
