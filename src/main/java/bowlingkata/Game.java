@@ -3,9 +3,6 @@ package bowlingkata;
 class Game {
     final Frames frames = new Frames();
 
-    public Game() {
-    }
-
     public int score() {
         return frames.score();
     }
@@ -26,11 +23,10 @@ class Game {
     }
 
     private void applyBonus(Roll roll) {
-        if (frames.size() > 1) {
-            Frame previousFrame = frames.previousFrame();
-            applyStrikeBonus(roll, previousFrame);
-            applySpareBonus(roll, previousFrame);
-        }
+        frames.previousFrame().ifPresent(frame -> {
+            applyStrikeBonus(roll, frame);
+            applySpareBonus(roll, frame);
+        });
     }
 
     private void applySpareBonus(Roll roll, Frame previousFrame) {

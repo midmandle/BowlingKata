@@ -2,6 +2,7 @@ package bowlingkata;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Frames {
     private List<Frame> frames;
@@ -26,11 +27,18 @@ public class Frames {
     }
 
     Frame currentFrame() {
-        return frames.get(frames.size() - 1);
+        return getFrame(1);
     }
 
-    Frame previousFrame() {
-        return frames.get(frames.size() - 2);
+    Optional<Frame> previousFrame() {
+        if (frames.size() < 2)
+            return Optional.empty();
+
+        return Optional.of(getFrame(2));
+    }
+
+    private Frame getFrame(int i) {
+        return frames.get(frames.size() - i);
     }
 
     void addRollToCurrentFrame(Roll roll) {
@@ -42,6 +50,6 @@ public class Frames {
     }
 
     Frame secondToLast() {
-        return frames.get(frames.size() - 3);
+        return getFrame(3);
     }
 }
