@@ -34,7 +34,9 @@ class Game {
     }
 
     private void applySpareBonus(Roll roll, Frame previousFrame) {
-        applyStrike(roll, previousFrame, previousFrame.isSpare() && isInPlay());
+        if (previousFrame.isSpare() && isInPlay()) {
+            previousFrame.addBonus(roll);
+        }
     }
 
     private boolean isInPlay() {
@@ -42,7 +44,7 @@ class Game {
     }
 
     private void applyStrikeBonus(Roll roll, Frame previousFrame) {
-        applyStrike(roll, previousFrame, previousFrame.isStrike());
+        applyStrike(roll, previousFrame);
         applyStrikeBonusForSecondToLastFrame(roll);
 
     }
@@ -50,12 +52,12 @@ class Game {
     private void applyStrikeBonusForSecondToLastFrame(Roll roll) {
         if(frames.size() > 2 && isInPlay()) {
             Frame secondToLastFrame = frames.secondToLast();
-            applyStrike(roll, secondToLastFrame, secondToLastFrame.isStrike());
+            applyStrike(roll, secondToLastFrame);
         }
     }
 
-    private void applyStrike(Roll roll, Frame frame, boolean strike) {
-        if (strike)
+    private void applyStrike(Roll roll, Frame frame) {
+        if (frame.isStrike())
             frame.addBonus(roll);
     }
 
