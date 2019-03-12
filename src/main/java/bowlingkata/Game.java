@@ -19,17 +19,36 @@ class Game {
         Roll roll = new Roll(rollScore);
         frames.addRollToCurrentFrame(roll);
 
+        applyBonus(roll);
+    }
+
+    private void applyBonus(Roll roll) {
         if (frames.size() > 1) {
             Frame previousFrame = frames.previousFrame();
 
-            if (previousFrame.isStrike()) {
-                previousFrame.addBonus(roll);
-            }
+            applyStrikeBonus(roll, previousFrame);
 
-            if (previousFrame.isSpare() && frames.state() == FrameState.IN_PLAY) {
-                previousFrame.addBonus(roll);
-            }
+            applySpareBonus(roll, previousFrame);
         }
+    }
+
+    private void applySpareBonus(Roll roll, Frame previousFrame) {
+        if (previousFrame.isSpare() && frames.state() == FrameState.IN_PLAY) {
+            previousFrame.addBonus(roll);
+        }
+    }
+
+    private void applyStrikeBonus(Roll roll, Frame previousFrame) {
+        if (previousFrame.isStrike()) {
+            previousFrame.addBonus(roll);
+        }
+
+        if(frames.size() > 2 && frames.state() == FrameState.IN_PLAY) {
+            Frame secondToLastFrame = frames.getFrame(3);
+            if (secondToLastFrame.isStrike())
+                secondToLastFrame.addBonus(roll);
+        }
+
     }
 
 }
