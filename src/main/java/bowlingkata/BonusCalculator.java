@@ -2,51 +2,23 @@ package bowlingkata;
 
 public class BonusCalculator {
     private final Frames frames;
+    private final StrikeBonusCalculator strikeBonusCalculator;
 
     public BonusCalculator(Frames frames) {
         this.frames = frames;
+        strikeBonusCalculator = new StrikeBonusCalculator(this.frames);
     }
 
     void applyBonus(Roll roll) {
         frames.previousFrame().ifPresent(frame -> {
-            applyStrikeBonus(roll, frame);
+            strikeBonusCalculator.applyStrikeBonus(roll, frame);
             applySpareBonus(roll, frame);
         });
     }
 
     void applySpareBonus(Roll roll, Frame previousFrame) {
-        if (previousFrame.isSpare() && isInPlay()) {
+        if (previousFrame.isSpare() && frames.isInPlay()) {
             previousFrame.addBonus(roll);
         }
-    }
-
-    boolean isInPlay() {
-        return frames.state() == FrameState.IN_PLAY;
-    }
-
-    void applyStrikeBonus(Roll roll, Frame previousFrame) {
-        applyStrike(roll, previousFrame);
-        applyStrikeBonusForSecondToLastFrame(roll);
-
-    }
-
-    void applyStrikeBonusForSecondToLastFrame(Roll roll) {
-        frames.secondToLast().ifPresent(frame -> {
-            applyStrikeToInPlay(roll, frame);
-        });
-    }
-
-    void applyStrikeToInPlay(Roll roll, Frame frame) {
-        if (isInPlay() || strikeInCurrentRoll())
-            applyStrike(roll, frame);
-    }
-
-    boolean strikeInCurrentRoll() {
-        return frames.currentFrame().isStrike();
-    }
-
-    void applyStrike(Roll roll, Frame frame) {
-        if (frame.isStrike())
-            frame.addBonus(roll);
     }
 }

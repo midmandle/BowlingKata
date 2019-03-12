@@ -55,4 +55,8 @@ public class Frames {
 
         return Optional.of(getFrame(3));
     }
+
+    boolean isInPlay() {
+        return state() == FrameState.IN_PLAY;
+    }
 }
