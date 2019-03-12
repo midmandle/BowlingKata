@@ -32,5 +32,4 @@ public class StrikeBonusCalculator {
         if (frame.isStrike())
             frame.addBonus(roll);
     }
-
 }
