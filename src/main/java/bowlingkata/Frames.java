@@ -3,6 +3,7 @@ package bowlingkata;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 public class Frames {
     private List<Frame> frames;
@@ -20,10 +21,6 @@ public class Frames {
         return frames
                 .stream().mapToInt(frame -> frame.score())
                 .sum();
-    }
-
-    double size() {
-        return frames.size();
     }
 
     Frame currentFrame() {
@@ -58,5 +55,9 @@ public class Frames {
 
     boolean isInPlay() {
         return state() == FrameState.IN_PLAY;
+    }
+
+    void applyBonus(Consumer<Frame> bonusCalculator) {
+        previousFrame().ifPresent(bonusCalculator);
     }
 }

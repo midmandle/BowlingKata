@@ -2,7 +2,8 @@ package bowlingkata;
 
 class Game {
     final Frames frames = new Frames();
-    private final BonusCalculator bonusCalculator = new BonusCalculator(frames);
+    private final BonusCalculator strikeBonusCalculator = new StrikeBonusCalculator(frames);
+    private final BonusCalculator spareBonusCalculator = new SpareBonusCalculator(frames);
 
     public int score() {
         return frames.score();
@@ -16,11 +17,14 @@ class Game {
 
         Roll roll = new Roll(rollScore);
         frames.addRollToCurrentFrame(roll);
-        bonusCalculator.applyBonus(roll);
+
+        frames.applyBonus(previousFrame -> {
+            strikeBonusCalculator.applyBonus(roll, previousFrame);
+            spareBonusCalculator.applyBonus(roll, previousFrame);
+        });
     }
 
     private boolean isFinished() {
         return frames.state() == FrameState.FINISHED;
     }
-
 }
