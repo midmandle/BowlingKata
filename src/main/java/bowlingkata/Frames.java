@@ -11,10 +11,6 @@ public class Frames {
         frames.add(new Frame());
     }
 
-    Frame getFrame(int i) {
-        return frames.get(frames.size() - i);
-    }
-
     void addFrame() {
         frames.add(new Frame());
     }
@@ -43,5 +39,9 @@ public class Frames {
 
     FrameState state() {
         return currentFrame().state();
+    }
+
+    Frame secondToLast() {
+        return frames.get(frames.size() - 3);
     }
 }
