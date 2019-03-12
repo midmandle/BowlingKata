@@ -49,7 +49,10 @@ public class Frames {
         return currentFrame().state();
     }
 
-    Frame secondToLast() {
-        return getFrame(3);
+    Optional<Frame> secondToLast() {
+        if(frames.size() < 3)
+            return Optional.empty();
+
+        return Optional.of(getFrame(3));
     }
 }

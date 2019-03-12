@@ -1,5 +1,7 @@
 package bowlingkata;
 
+import java.util.Optional;
+
 class Game {
     final Frames frames = new Frames();
 
@@ -46,10 +48,14 @@ class Game {
     }
 
     private void applyStrikeBonusForSecondToLastFrame(Roll roll) {
-        if(frames.size() > 2 && isInPlay()) {
-            Frame secondToLastFrame = frames.secondToLast();
-            applyStrike(roll, secondToLastFrame);
-        }
+        frames.secondToLast().ifPresent(frame -> {
+            applyStrikeToInPlay(roll, frame);
+        });
+    }
+
+    private void applyStrikeToInPlay(Roll roll, Frame frame) {
+        if(isInPlay())
+            applyStrike(roll, frame);
     }
 
     private void applyStrike(Roll roll, Frame frame) {
