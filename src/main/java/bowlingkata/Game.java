@@ -1,7 +1,5 @@
 package bowlingkata;
 
-import java.util.Optional;
-
 class Game {
     final Frames frames = new Frames();
 
@@ -54,8 +52,12 @@ class Game {
     }
 
     private void applyStrikeToInPlay(Roll roll, Frame frame) {
-        if(isInPlay())
+        if(isInPlay() || strikeInCurrentRoll())
             applyStrike(roll, frame);
+    }
+
+    private boolean strikeInCurrentRoll() {
+        return frames.currentFrame().isStrike();
     }
 
     private void applyStrike(Roll roll, Frame frame) {
